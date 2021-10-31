@@ -41,7 +41,14 @@ func (language *GoLanguageModel) Prepare(model *surface.Model, inputDocumentType
 			case "boolean":
 				f.NativeType = "bool"
 			case "number":
-				f.NativeType = "int"
+				switch f.Format {
+                                case "float":
+                                        f.NativeType = "float32"
+                                case "double":
+                                        f.NativeType = "float64"
+                                default:
+                                        f.NativeType = "int"
+                                }
 			case "integer":
 				switch f.Format {
 				case "int32":
